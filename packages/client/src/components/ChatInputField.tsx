@@ -1,5 +1,6 @@
 import { TextField, Button } from "@material-ui/core";
 import { useState } from "react";
+import { sendMessage } from "../services/socket";
 
 const ChatInputField = () => {
   const [textInput, setTextInput] = useState("");
@@ -11,7 +12,14 @@ const ChatInputField = () => {
           setTextInput(e.target.value);
         }}
       />
-      <Button variant="contained">Send</Button>
+      <Button
+        variant="contained"
+        onClick={() => {
+          sendMessage(textInput);
+        }}
+      >
+        Send
+      </Button>
     </div>
   );
 };

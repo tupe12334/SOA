@@ -1,0 +1,24 @@
+{
+  "name": "SOA",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tupe12334/SOA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tupe12334/SOA/issues"
+  },
+  "homepage": "https://github.com/tupe12334/SOA#readme",
+  "dependencies": {
+    "dotenv": "^9.0.1",
+    "lerna": "^4.0.0"
+  }
+}
