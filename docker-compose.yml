@@ -9,6 +9,8 @@ services:
       - PORT=3000
     networks:
       - TicTacToe
+    depends_on:
+      - back
   back:
     build: ./packages/server/
     restart: always
@@ -18,6 +20,8 @@ services:
       - PORT=5000
     networks:
       - TicTacToe
+    depends_on:
+      - db
   db:
     image: postgres
     restart: always

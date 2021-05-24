@@ -7,6 +7,7 @@ export const updateTile = (y, x, value, board) => {
   console.log(newBoard);
   return newBoard;
 };
+
 const lineWin = (a, b, c) => {
   //   console.log({ a }, { b }, { c });
   if ((a === b) === c) {
