@@ -6,7 +6,13 @@
     "allowJs": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+    // "strict": true
   },
   "include": ["src"]
 }
