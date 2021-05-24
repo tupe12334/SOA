@@ -5,7 +5,9 @@ const HomePage = () => {
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Button variant="contained">Enter room</Button>
+        <Button variant="contained">
+          <Link to="/room">Enter room</Link>
+        </Button>
         <Button variant="contained">
           <Link to="/login">Login</Link>
         </Button>

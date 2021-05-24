@@ -5,7 +5,7 @@ import { sendMessage } from "../services/socket";
 const ChatInputField = () => {
   const [textInput, setTextInput] = useState("");
   return (
-    <div>
+    <>
       <TextField
         value={textInput}
         onChange={(e) => {
@@ -20,7 +20,7 @@ const ChatInputField = () => {
       >
         Send
       </Button>
-    </div>
+    </>
   );
 };
 export default ChatInputField;

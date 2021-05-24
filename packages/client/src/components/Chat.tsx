@@ -4,13 +4,11 @@ import ChatShow from "./ChatShow";
 
 const Chat = () => {
   return (
-    <div>
-      <Paper>
-        <Typography>Title</Typography>
-        <ChatShow />
-        <ChatInputField />
-      </Paper>
-    </div>
+    <Paper>
+      <Typography>Title</Typography>
+      <ChatShow />
+      <ChatInputField />
+    </Paper>
   );
 };
 export default Chat;
