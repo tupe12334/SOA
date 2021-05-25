@@ -1,20 +1,16 @@
-import { User } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import * as crypto from 'crypto';
-import { Prisma } from '.prisma/client';
 import { JwtService } from '@nestjs/jwt';
+import * as crypto from 'crypto';
+import { IUser, userModel } from 'src/mongo/models/User';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private prismaService: PrismaService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private jwtService: JwtService) {}
   async login(user: { email: string; password: string }) {
-    const dbUser = await this.prismaService.user.findUnique({
-      where: { email: user.email },
-    });
+    const dbUser = await userModel.findOne({ email: user.email });
+    // await this.prismaService.user.findUnique({
+    //   where: { email: user.email },
+    // });
     const loginPassword = crypto
       .createHmac('sha256', user.password)
       .digest('hex');
@@ -37,12 +33,16 @@ export class AuthService {
       return { data: false, meta: null };
     }
   }
-  register(user: Prisma.UserCreateInput) {
+  register(user: IUser) {
     try {
       console.log(user);
       user.password = crypto.createHmac('sha256', user.password).digest('hex');
       console.log(user);
-      return this.prismaService.user.create({ data: user });
+      if (user.email) {
+        return userModel.create({ ...user });
+      }
+      throw new Error('Error');
+      // return this.prismaService.user.create({ data: user });
     } catch (error) {
       throw new Error('Error');
     }

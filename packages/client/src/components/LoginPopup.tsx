@@ -12,7 +12,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { loginAction } from "../store/actions/authActions";
 require("dotenv").config();
-
+// type props = {
+//   open: boolean;
+//   setOpen: any;
+//   auth;
+//   loginAction;
+// };
 const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
   const [selectedOption, setSelectedOption] = useState("login");
   const { handleSubmit, handleChange } = useFormik({

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
+import { TicTacToeGateway } from './ticTacToe.gateway';
 import { TicTacToeService } from './ticTacToe.service';
 
 @Module({
-  providers: [TicTacToeService],
+  imports: [],
+  providers: [TicTacToeService, TicTacToeGateway],
 })
 export class TicTacToeModule {}

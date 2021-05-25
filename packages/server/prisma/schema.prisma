@@ -1,13 +1,12 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider                 = "prisma-client-js"
+  useUncheckedScalarInputs = "true"
+  emitTranspiledCode       = "true"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -15,4 +14,22 @@ model User {
   email    String  @unique
   name     String?
   password String?
+  Board    Board[]
+}
+
+model Board {
+  id      String @id @default(uuid())
+  A1      String
+  A2      String
+  A3      String
+  B1      String
+  B2      String
+  B3      String
+  C1      String
+  C2      String
+  C3      String
+  Turn    User?  @relation(fields: [turnId], references: [id])
+  turnId  Int?
+  winerId Int?
+  Winer   User?  @relation(fields: [winerId], references: [id])
 }

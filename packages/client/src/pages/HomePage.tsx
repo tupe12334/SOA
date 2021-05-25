@@ -5,11 +5,11 @@ const HomePage = () => {
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <Button variant="contained">
-          <Link to="/room">Enter room</Link>
+        <Button variant="contained" color="secondary">
+          <Link to="/room">לCreate room</Link>
         </Button>
 
-        <Chat />
+        {/* <Chat /> */}
       </div>
     </div>
   );
