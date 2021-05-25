@@ -19,7 +19,7 @@ export class AuthService {
       .createHmac('sha256', user.password)
       .digest('hex');
     if (dbUser.password === loginPassword) {
-      let payload = `${user.email}${dbUser.id}`;
+      let payload = `{email:${user.email},id:${dbUser.id}}`;
       const accessToken = this.jwtService.sign(payload);
       return {
         status: 200,
@@ -62,4 +62,10 @@ export class AuthService {
   //       return { data: false, meta: null };
   //     }
   //   }
+  getUserFromAuthenticationToken(AT: string) {
+    const decode = this.jwtService.decode(AT);
+    console.log(decode);
+
+    return decode;
+  }
 }

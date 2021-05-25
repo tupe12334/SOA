@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 import Row from "./Row";
 
-export const updateTile = (y, x, value, board) => {
-  let newBoard = board;
-  newBoard[y][x] = value;
-  console.log(newBoard);
-  return newBoard;
-};
+// export const updateTile = (y, x, value, board) => {
+//   let newBoard = board;
+//   newBoard[y][x] = value;
+//   console.log(newBoard);
+//   return newBoard;
+// };
 
-const lineWin = (a, b, c) => {
+const lineWin = (a: string, b: string, c: string) => {
   //   console.log({ a }, { b }, { c });
-  if ((a === b) === c) {
+  if (a === b && b === c) {
     return a;
   }
   return null;
 };
 
 const Board = () => {
-  const [board, setBoard] = useState([
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
+  const [board, setBoard] = useState<string[][]>([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
   ]);
   const [turn, setTurn] = useState("X");
-  const [win, setWin] = useState(null);
+  const [win, setWin] = useState("");
   useEffect(() => {
     board.forEach((row) => {
       console.log("dsaf");

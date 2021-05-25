@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 @Module({
   providers: [AuthService, PrismaService],
   controllers: [AuthController],
+  exports: [AuthService],
   imports: [
     JwtModule.register({
       secretOrPrivateKey: 'secret123456789',

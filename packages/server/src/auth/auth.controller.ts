@@ -1,6 +1,6 @@
 import { Prisma } from '.prisma/client';
 import { User } from '.prisma/client';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -21,5 +21,11 @@ export class AuthController {
     } catch (error) {
       return;
     }
+  }
+  @Get('verify/:token')
+  verify(@Param() token: { token: string }) {
+    console.log(token);
+
+    return this.authService.getUserFromAuthenticationToken(token.token);
   }
 }

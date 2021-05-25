@@ -1,25 +1,16 @@
-import { Fab } from "@material-ui/core";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 import "./App.css";
-import Header from "./layout/Header";
-import HomePage from "./pages/HomePage";
-import RoomPage from "./pages/RoomPage";
+import Page from "./layout/Page";
+import store from "./store/store";
+require("dotenv").config();
 
 function App() {
   return (
     <>
-      <Header />
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/room">
-            <RoomPage />
-          </Route>
-        </Switch>
-      </Router>
+      <Provider store={store}>
+        <Page />
+      </Provider>
     </>
   );
 }

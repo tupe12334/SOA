@@ -8,9 +8,7 @@ const HomePage = () => {
         <Button variant="contained">
           <Link to="/room">Enter room</Link>
         </Button>
-        <Button variant="contained">
-          <Link to="/login">Login</Link>
-        </Button>
+
         <Chat />
       </div>
     </div>

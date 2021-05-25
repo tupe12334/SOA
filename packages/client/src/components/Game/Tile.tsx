@@ -1,6 +1,4 @@
 import { colors } from "@material-ui/core";
-import { updateTile } from "./Board";
-
 //@ts-ignore
 const Tile = ({ symbol, index, set, rowIndex, board, turn, setTurn }) => {
   return (
@@ -16,7 +14,7 @@ const Tile = ({ symbol, index, set, rowIndex, board, turn, setTurn }) => {
       }}
       onClick={() => {
         if (!board[rowIndex][index]) {
-          set(updateTile(rowIndex, index, turn, board));
+          // set(updateTile(rowIndex, index, turn, board));
           setTurn(turn === "X" ? "O" : "X");
         }
       }}
