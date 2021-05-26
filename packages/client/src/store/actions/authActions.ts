@@ -13,9 +13,9 @@ export const loginAction =
     console.log(data);
 
     if (data.data) {
-      dispatch(loginSucssesfully);
+      dispatch(loginSuccessfully);
     }
   };
-const loginSucssesfully = () => {
+const loginSuccessfully = () => {
   return { payload: {}, type: LOGIN };
 };

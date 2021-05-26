@@ -9,30 +9,23 @@ export enum Players {
 export interface IGame {
   openUser: Types.ObjectId | IUser;
   joinUser?: Types.ObjectId | IUser | null;
-  A1: Players;
-  A2: Players;
-  A3: Players;
-  B1: Players;
-  B2: Players;
-  B3: Players;
-  C1: Players;
-  C2: Players;
-  C3: Players;
+  board: string[];
+  winer: Types.ObjectId;
+  closed: boolean;
 }
 
 export interface IGameDoc extends IGame, Document {}
-export const gameFilds: Record<keyof IGame, any> = {
+export const gameFields: Record<keyof IGame, any> = {
   openUser: { type: Schema.Types.ObjectId, ref: 'user' },
   joinUser: { type: Schema.Types.ObjectId, ref: 'user' },
-  A1: { type: Players, unique: true, required: true, default: '' },
-  A2: { type: Players, unique: true, required: true, default: '' },
-  A3: { type: Players, unique: true, required: true, default: '' },
-  B1: { type: Players, unique: true, required: true, default: '' },
-  B2: { type: Players, unique: true, required: true, default: '' },
-  B3: { type: Players, unique: true, required: true, default: '' },
-  C1: { type: Players, unique: true, required: true, default: '' },
-  C2: { type: Players, unique: true, required: true, default: '' },
-  C3: { type: Players, unique: true, required: true, default: '' },
+  winer: { type: Schema.Types.ObjectId, ref: 'user' },
+  board: {
+    type: [String],
+    unique: false,
+    required: true,
+    default: ['', '', '', '', '', '', '', '', ''],
+  },
+  closed: { type: Boolean, default: false, required: true },
 };
-const gameSchema = new Schema(gameFilds);
+const gameSchema = new Schema(gameFields);
 export const gameModel = model<IGameDoc>('Game', gameSchema);

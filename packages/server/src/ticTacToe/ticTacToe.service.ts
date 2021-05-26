@@ -9,4 +9,10 @@ export class TicTacToeService {
   async createRoom(user: IUserDoc) {
     return user.email ? await gameModel.create({ openUser: user._id }) : null;
   }
+  async getGameState(gameId: string) {
+    return await gameModel.findById(gameId);
+  }
+  async getActiveGame() {
+    return await gameModel.find({ closed: false });
+  }
 }

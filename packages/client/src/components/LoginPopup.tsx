@@ -8,8 +8,9 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { connect } from "react-redux";
+import { globalJwtContext } from "../App";
 import { loginAction } from "../store/actions/authActions";
 require("dotenv").config();
 // type props = {
@@ -20,6 +21,8 @@ require("dotenv").config();
 // };
 const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
   const [selectedOption, setSelectedOption] = useState("login");
+  const { user, setUser } = useContext(globalJwtContext);
+
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
       email: "",
@@ -27,17 +30,20 @@ const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
       name: "",
     },
     onSubmit: async (values) => {
-      //   console.log(values);
-      handleSubmitAction(values);
-      //   console.log(selectedOption);
-      //   const data = (
-      //     await axios.post(
-      //       `${process.env.REACT_APP_SERVER_URL}/auth/${selectedOption}`,
-      //       values
-      //     )
-      //   ).data;
-      //   console.log(data);
-      //   alert(JSON.stringify(values, null, 2));
+      // console.log(selectedOption);
+      // console.log(values);
+      console.log(user);
+
+      const data = (
+        await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/auth/${selectedOption}`,
+          values
+        )
+      ).data;
+      // console.log(data.meta.jwt);
+      setUser(data.meta.jwt);
+      setOpen(false);
+      // alert(JSON.stringify(values, null, 2));
     },
   });
   const handleClickOpen = () => {

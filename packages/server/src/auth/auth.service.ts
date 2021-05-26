@@ -8,7 +8,7 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
   async login(user: { email: string; password: string }) {
     const dbUser = await userModel.findOne({ email: user.email });
-    console.log(dbUser);
+    // console.log(dbUser);
 
     // await this.prismaService.user.findUnique({
     //   where: { email: user.email },
@@ -17,7 +17,7 @@ export class AuthService {
       .createHmac('sha256', user.password)
       .digest('hex');
     if (dbUser.password === loginPassword) {
-      let payload = `{email:${user.email},id:${dbUser.id}}`;
+      let payload = `{"email":"${user.email}","id":"${dbUser.id}"}`;
       const accessToken = this.jwtService.sign(payload);
       return {
         status: 200,
@@ -37,9 +37,9 @@ export class AuthService {
   }
   register(user: IUser) {
     try {
-      console.log(user);
+      // console.log(user);
       user.password = crypto.createHmac('sha256', user.password).digest('hex');
-      console.log(user);
+      // console.log(user);
       if (user.email) {
         return userModel.create({ ...user });
       }

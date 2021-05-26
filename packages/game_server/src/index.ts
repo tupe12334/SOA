@@ -1,12 +1,12 @@
 import express from "express";
 import { Server as SocketServer } from "socket.io";
-import { Server } from "http";
+import { createServer } from "http";
 require("dotenv").config();
-console.log(process.env.SERVER_PORT);
+
+// console.log(process.env.PORT);
 const app = express();
-const http = new Server(app);
-//@ts-ignore
-const io = new SocketServer(http, { cors: "*" });
+const http = createServer(app);
+const io = new SocketServer(http, { cors: {} });
 io.on("connection", function (socket) {
   console.log("A user connected");
 
@@ -17,6 +17,12 @@ io.on("connection", function (socket) {
     socket.emit("send_message", data);
     // console.log(data);
   });
+  socket.on("join_room", function (data) {
+    // socket.emit("send_message", data);
+    console.log(data);
+  });
 });
 
-http.listen(Number(process.env.SERVER_PORT) | 5000);
+http.listen(Number(process.env.PORT), () => {
+  console.log("listen on: " + process.env.PORT);
+});

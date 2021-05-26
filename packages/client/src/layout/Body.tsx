@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LoginPopup from "../components/LoginPopup";
+import { globalJwtContext } from "../App";
 import HomePage from "../pages/HomePage";
 import RoomPage from "../pages/RoomPage";
 
 const Body = () => {
+  const { user, setUser } = useContext(globalJwtContext);
+
   return (
     <>
       <Router>
@@ -12,9 +14,11 @@ const Body = () => {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route path="/room">
-            <RoomPage />
-          </Route>
+          {user ? (
+            <Route path="/room/:gameId">
+              <RoomPage />
+            </Route>
+          ) : null}
         </Switch>
       </Router>
     </>

@@ -1,21 +1,30 @@
 import { AppBar, Button, Toolbar, Typography } from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import React from "react";
+import React, { useContext } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
+import { globalJwtContext } from "../App";
 
 const Header = ({ setLoginPopup, auth }) => {
+  const { user, setUser } = useContext(globalJwtContext);
+
   return (
     <AppBar position="static" style={{ flexGrow: 1 }}>
       <Toolbar>
         {/* <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton> */}
+
         <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Tic Tac Toe Game!
+          Tic Tac Toe Game!{" "}
+          {user ? ` - User: ${JSON.parse(user.user_id).email}` : null}
         </Typography>
-        {auth.isLogin ? (
-          <Button color="inherit" onClick={() => {}}>
+        {user ? (
+          <Button
+            color="inherit"
+            onClick={() => {
+              setUser(null);
+            }}
+          >
             Logout
           </Button>
         ) : (

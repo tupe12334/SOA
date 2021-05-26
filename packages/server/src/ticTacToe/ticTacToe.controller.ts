@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { IUser, userModel } from 'src/mongo/models/User';
 import { MongoService } from 'src/mongo/mongo.service';
 import { TicTacToeService } from './ticTacToe.service';
@@ -14,5 +14,13 @@ export class TicTacToeController {
     console.log(body);
     const user = await userModel.findOne({ email: body.email });
     return this.ticTacToeService.createRoom(user);
+  }
+  @Get('state/:gameId')
+  async gameState(@Param('gameId') gameId: string) {
+    return this.ticTacToeService.getGameState(gameId);
+  }
+  @Get('open')
+  async openGames() {
+    return this.ticTacToeService.getActiveGame();
   }
 }

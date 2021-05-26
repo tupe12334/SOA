@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   exports: [AuthService],
   imports: [
     JwtModule.register({
-      secretOrPrivateKey: 'secret123456789',
+      secret: 'secret123456789',
     }),
   ],
 })
