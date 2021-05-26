@@ -28,7 +28,7 @@ const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
     },
     onSubmit: async (values) => {
       //   console.log(values);
-      loginAction(values.email, values.password);
+      handleSubmitAction(values);
       //   console.log(selectedOption);
       //   const data = (
       //     await axios.post(
@@ -43,7 +43,9 @@ const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const handleSubmitAction = (values) => {
+    loginAction(values.email, values.password);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -101,9 +103,9 @@ const LoginPopup = ({ open, setOpen, auth, loginAction }) => {
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-const mapDispatchToProps = (dispatch) => ({
-  loginAction: () => dispatch(loginAction),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   loginAction: () => dispatch(loginAction),
+// });
 
 export default connect(mapStateToProps, { loginAction })(LoginPopup);
 

@@ -1,54 +1,92 @@
 import { useEffect, useState } from "react";
-import Row from "./Row";
-
-// export const updateTile = (y, x, value, board) => {
-//   let newBoard = board;
-//   newBoard[y][x] = value;
-//   console.log(newBoard);
-//   return newBoard;
-// };
-
-const lineWin = (a: string, b: string, c: string) => {
-  //   console.log({ a }, { b }, { c });
-  if (a === b && b === c) {
-    return a;
-  }
-  return null;
-};
-
+import "./Board.css";
 const Board = () => {
-  const [board, setBoard] = useState<string[][]>([
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ]);
-  const [turn, setTurn] = useState("X");
-  const [win, setWin] = useState("");
-  useEffect(() => {
-    board.forEach((row) => {
-      console.log("dsaf");
+  const [game, setGame] = useState(Array(9).fill(""));
+  const [isX, setIsX] = useState(false);
+  const [turnNumber, setTurnNumber] = useState(0);
+  const [winner, setWinner] = useState(false);
 
-      const value = lineWin(row[0], row[1], row[2]);
-      if (value) {
-        console.log("dsafdsa");
-        setWin(value);
+  const turn = (index) => {
+    let g = [...game];
+    if (!g[index] && !winner) {
+      g[index] = isX ? "X" : "O";
+      setGame(g);
+      setIsX(!isX);
+      setTurnNumber(turnNumber + 1);
+    }
+  };
+
+  const restart = () => {
+    setGame(Array(9).fill(""));
+    setWinner(false);
+    setTurnNumber(0);
+  };
+
+  useEffect(() => {
+    // check for winner for every turn
+    combinations.forEach((c) => {
+      if (
+        game[c[0]] === game[c[1]] &&
+        game[c[0]] === game[c[2]] &&
+        game[c[0]] !== ""
+      ) {
+        setWinner(true);
       }
     });
-  }, [turn]);
+  }, [game]);
+
   return (
-    <div>
-      {win ? <div>{win + " win"}</div> : null}
-      {board.map((row, i) => (
-        <Row
-          index={i}
-          setBoard={setBoard}
-          row={row}
-          board={board}
-          turn={turn}
-          setTurn={setTurn}
-        />
-      ))}
+    <div className="container">
+      <p>
+        {winner || turnNumber === 9 ? (
+          <button className="reset-btn" onClick={restart}>
+            Restart
+          </button>
+        ) : null}
+        {winner ? (
+          <span>We have a winner: {!isX ? "X" : "O"}</span>
+        ) : turnNumber === 9 ? (
+          <span>It's a tie!</span>
+        ) : (
+          <br />
+        )}
+      </p>
+      <div className="row">
+        <Box index={0} turn={turn} value={game[0]} />
+        <Box index={1} turn={turn} value={game[1]} />
+        <Box index={2} turn={turn} value={game[2]} />
+      </div>
+      <div className="row">
+        <Box index={3} turn={turn} value={game[3]} />
+        <Box index={4} turn={turn} value={game[4]} />
+        <Box index={5} turn={turn} value={game[5]} />
+      </div>
+      <div className="row">
+        <Box index={6} turn={turn} value={game[6]} />
+        <Box index={7} turn={turn} value={game[7]} />
+        <Box index={8} turn={turn} value={game[8]} />
+      </div>
     </div>
   );
 };
+
+const Box = ({ index, turn, value }) => {
+  return (
+    <div className="box" onClick={() => turn(index)}>
+      {value}
+    </div>
+  );
+};
+
+const combinations = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 export default Board;

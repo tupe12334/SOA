@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { glob } from 'glob';
 import * as mongoose from 'mongoose';
+
 @Global()
 @Injectable()
 export class MongoService implements OnModuleInit, OnModuleDestroy {

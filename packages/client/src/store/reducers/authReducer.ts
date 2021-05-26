@@ -3,6 +3,7 @@ import { LOGIN } from "../types";
 const initialState = {
   isLoading: false,
   jwt: {},
+  email: null,
 };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {

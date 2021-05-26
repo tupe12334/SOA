@@ -8,7 +8,7 @@ export enum Players {
 
 export interface IGame {
   openUser: Types.ObjectId | IUser;
-  joinUser: Types.ObjectId | IUser;
+  joinUser?: Types.ObjectId | IUser | null;
   A1: Players;
   A2: Players;
   A3: Players;
@@ -19,6 +19,7 @@ export interface IGame {
   C2: Players;
   C3: Players;
 }
+
 export interface IGameDoc extends IGame, Document {}
 export const gameFilds: Record<keyof IGame, any> = {
   openUser: { type: Schema.Types.ObjectId, ref: 'user' },

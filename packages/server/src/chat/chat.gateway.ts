@@ -1,5 +1,7 @@
 import {
   MessageBody,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -7,7 +9,7 @@ import {
 import { Server } from 'socket.io';
 
 @WebSocketGateway()
-export class ChatGateway {
+export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
 
@@ -15,4 +17,6 @@ export class ChatGateway {
   listenForMessages(@MessageBody() data: string) {
     this.server.sockets.emit('receive_message', data);
   }
+  handleConnection() {}
+  handleDisconnect() {}
 }

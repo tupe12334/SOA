@@ -6,7 +6,7 @@ const HomePage = () => {
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Button variant="contained" color="secondary">
-          <Link to="/room">לCreate room</Link>
+          <Link to="/room">Create room</Link>
         </Button>
 
         {/* <Chat /> */}

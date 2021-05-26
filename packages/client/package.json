@@ -16,6 +16,7 @@
     "dotenv": "^8.2.0",
     "formik": "^2.2.8",
     "react": "^17.0.2",
+    "react-chat-elements": "^10.15.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",

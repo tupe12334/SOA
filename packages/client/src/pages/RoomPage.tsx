@@ -5,7 +5,7 @@ const RoomPage = () => {
   return (
     <div>
       <Board />
-      <Chat />
+      {/* <Chat /> */}
     </div>
   );
 };

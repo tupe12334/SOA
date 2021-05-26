@@ -8,6 +8,8 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
   async login(user: { email: string; password: string }) {
     const dbUser = await userModel.findOne({ email: user.email });
+    console.log(dbUser);
+
     // await this.prismaService.user.findUnique({
     //   where: { email: user.email },
     // });
